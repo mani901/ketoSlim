@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Home from "./pages/Home";
 import Result from './pages/Result';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Sales from './pages/Sales';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
              <Route path="/results" element={<Result />} />
+             <Route path="/sales" element={<Sales />} />
           </Routes>
         </Router>
       </div>
