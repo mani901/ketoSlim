@@ -3,13 +3,14 @@ import React from 'react';
 const SubmitButton = ({ isValid, onSubmit }) => {
   return (
     <>
+
       <button
         type="submit"
         disabled={!isValid}
-        className={`w-full font-medium py-3 px-4 rounded-xl transition-colors duration-300 ${
+        className={`w-full text-lg font-semibold bg-[#36bc9f] border border-[#36bc9f] hover:opacity-90 py-3 px-4 focus:outline-none rounded-xl focus:ring-2 cursor-pointer transition-colors duration-300 ${
           isValid
-            ? 'bg-[#36bc9f] hover:bg-green-300 text-white'
-            : 'bg-green-200 text-white cursor-pointer'
+            ? ' text-white'
+            : 'opacity-50 text-white cursor-pointer'
         }`}
       >
         See My Results

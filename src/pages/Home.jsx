@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import FormHeader from '../components/home/FormHeader';
+import { useNavigate } from 'react-router-dom';
 import FormFields from '../components/home/FormFields';
 import SubmitButton from '../components/home/SubmitButton';
 
 const Home = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     gender: 'male',
     bodyFat: 0,
@@ -31,6 +32,7 @@ const Home = () => {
     if (!isFormValid()) return;
 
     console.log(formData);
+    navigate('/results', { state: formData });
   };
 
   const handleInputChange = (field, value) => {
@@ -38,15 +40,12 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f4f4] p-4">
-      <FormHeader />
-      
-      <div className="max-w-md mx-auto mt-1">
-        <h1 className="mb-8 text-[34px] leading-[1.2em] font-semibold text-center tracking-[-0.5px] text-black">
-          Enter Your <span className="text-red-400">Details</span>
-        </h1>
+    <div className="w-full max-w-xl mx-auto mt-1">
+       <h1 className="mb-8 text-[34px] leading-[1.2em] font-semibold text-center font-inter tracking-[-0.5px] text-[#12241f]">
+  Enter Your <span className="text-[#f75950]">Details</span>
+</h1>
 
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
+        <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-2xl p-4 sm:p-8 w-full max-w-xl space-y-6">
           <FormFields 
             formData={formData}
             onInputChange={handleInputChange}
@@ -57,7 +56,6 @@ const Home = () => {
           />
         </form>
       </div>
-    </div>
   );
 };
 

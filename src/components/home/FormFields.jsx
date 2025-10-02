@@ -16,7 +16,7 @@ const FormFields = ({ formData, onInputChange }) => {
               value="male"
               checked={formData.gender === 'male'}
               onChange={(e) => onInputChange('gender', e.target.value)}
-              className="mr-2"
+              className="mr-2 accent-green-800"
             />
             Male
           </label>
@@ -27,7 +27,7 @@ const FormFields = ({ formData, onInputChange }) => {
               value="female"
               checked={formData.gender === 'female'}
               onChange={(e) => onInputChange('gender', e.target.value)}
-              className="mr-2"
+              className="mr-2 accent-green-800"
             />
             Female
           </label>
@@ -124,12 +124,9 @@ const FormFields = ({ formData, onInputChange }) => {
           <option value="">Select cups</option>
           <option value="1">1</option>
           <option value="2">2</option>
-          <option value="3">3</option>
           <option value="4">4</option>
-          <option value="5">5</option>
           <option value="6">6</option>
-          <option value="8">8</option>
-          <option value="10">10+</option>
+         
         </select>
       </div>
 

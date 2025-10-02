@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import resultsData from "../components/result/resultsData";
 import ProgressDots from "../components/result/ProgressDots";
 import ResultCard from "../components/result/ResultCard";
@@ -6,7 +7,61 @@ import NavigationButtons from "../components/result/NavigationButtons";
 
 const Result = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const currentResult = resultsData[currentStep];
+  const location = useLocation();
+  const formState = location.state || {};
+
+  const hydratedResults = useMemo(() => {
+    const {
+      bodyFat,
+      bmi,
+      dailyCalorieTarget,
+      cupsOfWater,
+      weeklyWeightLossGoal,
+      daysToSeeResults,
+    } = formState;
+
+    return resultsData.map((item) => {
+      if (item.id === "body-fat" && (bodyFat || bodyFat === 0)) {
+        return {
+          ...item,
+          title: `Your Body Fat Percentage Is ${bodyFat}%`,
+        };
+      }
+      if (item.id === "bmi" && (bmi || bmi === 0)) {
+        return {
+          ...item,
+          title: `Your BMI Is ${bmi}`,
+        };
+      }
+      if (item.id === "calories" && dailyCalorieTarget) {
+        return {
+          ...item,
+          highlight: `${dailyCalorieTarget} Calories`,
+        };
+      }
+      if (item.id === "hydration" && cupsOfWater) {
+        return {
+          ...item,
+          title: `Your Body Needs ${cupsOfWater} Cups of Water Daily`,
+        };
+      }
+      if (item.id === "weight-rate" && weeklyWeightLossGoal) {
+        return {
+          ...item,
+          highlight: `${weeklyWeightLossGoal} lbs / Week`,
+        };
+      }
+      if (item.id === "timeline" && daysToSeeResults) {
+        return {
+          ...item,
+          title: `You Could See Results in as Little as ${daysToSeeResults} Days`,
+        };
+      }
+      return item;
+    });
+  }, [formState]);
+
+  const currentResult = hydratedResults[currentStep];
 
   const handleNext = () => {
     if (currentStep < resultsData.length - 1) {
