@@ -15,6 +15,7 @@ const Result = () => {
 
   const hydratedResults = useMemo(() => {
     const {
+      gender,
       bodyFat,
       bmi,
       dailyCalorieTarget,

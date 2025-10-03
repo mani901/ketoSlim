@@ -42,7 +42,13 @@ const ResultCard = ({ result }) => {
           >
             {text}
           </p>
+          
         ))}
+
+        <p className="text-[16px] font-normal font-inter mt-2 mb-6 text-[#f75950]">
+  Your current level may be slowing metabolism, increasing inflammation, or making it harder to stay consistent with workouts.
+</p>
+      
       </div>
     </div>
   );
