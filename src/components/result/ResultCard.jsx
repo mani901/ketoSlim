@@ -2,17 +2,14 @@ import React from "react";
 
 const ResultCard = ({ result }) => {
   return (
-    <div className="rounded-2xl shadow-xl border p-4 sm:p-8 w-full max-w-xl flex flex-col items-center mb-6 bg-white border-gray-200 text-[#183B49]">
+    <div className="result-card rounded-2xl shadow-xl p-4 sm:p-8 w-full max-w-xl flex flex-col items-center mb-6">
       {/* Icon */}
       <div className="flex justify-center items-center mb-2">
         <span className="text-[34px]">{result.icon}</span>
       </div>
 
       {/* Title */}
-      <h1
-        className="text-center text-[34px] leading-[1.2em] font-semibold font-inter mb-1"
-        style={{ color: "rgb(24, 59, 73)" }}
-      >
+      <h1 className="text-heading-results text-center text-[34px] leading-[1.2em] font-semibold font-inter mb-1">
         {result.title}{" "}
         {result.highlight && (
           <span style={{ color: "var(--accent2)" }}>{result.highlight}</span>
@@ -21,10 +18,7 @@ const ResultCard = ({ result }) => {
 
       {/* Subtitle */}
       {result.subtitle && (
-        <h2
-          className="text-center text-[20px] font-semibold font-inter mb-2"
-          style={{ color: "rgb(24, 59, 73)" }}
-        >
+        <h2 className="text-heading-results text-center text-[20px] font-semibold font-inter mb-2">
           {result.subtitle}
         </h2>
       )}
@@ -44,7 +38,7 @@ const ResultCard = ({ result }) => {
         {result.paragraphs?.map((text, idx) => (
           <p
             key={idx}
-            className="text-[20px] font-normal font-inter mb-2 text-[#13556F]"
+            className="text-paragraph text-[20px] font-normal font-inter mb-2"
           >
             {text}
           </p>

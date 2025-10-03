@@ -1,6 +1,6 @@
 import React from "react";
 
-const TrustedSection = () => {
+const TrustedSection = ({ isDarkMode }) => {
   const sources = [
     {
       logo: "/pubmed-logo-b.png",
@@ -14,7 +14,12 @@ const TrustedSection = () => {
 
   return (
     <div className="w-full mt-10">
-      <h2 className="font-bold text-3xl sm:text-4xl mb-10 text-left text-[#12241F]">
+      <h2
+        className="font-bold text-3xl sm:text-4xl mb-10 text-left"
+        style={{
+          color: isDarkMode ? '#E0E6E9' : '#12241F',
+        }}
+      >
         Trusted by health &amp; nutrition professionals
       </h2>
       <div className="flex flex-col gap-10">
@@ -23,8 +28,21 @@ const TrustedSection = () => {
             <div className="flex justify-center items-center gap-2 mb-1 w-full">
               <img alt="Logo" className="h-10 w-auto" src={item.logo} />
             </div>
-            <p className="text-base text-[#13556F]">{item.text}</p>
-            <a href="#" className="underline text-sm mt-1 text-[#F75950]">
+            <p
+              className="text-base"
+              style={{
+                color: isDarkMode ? '#B5C2C9' : '#13556F',
+              }}
+            >
+              {item.text}
+            </p>
+            <a
+              href="#"
+              className="underline text-sm mt-1"
+              style={{
+                color: isDarkMode ? '#F75950' : '#F75950',
+              }}
+            >
               source
             </a>
           </div>

@@ -1,5 +1,5 @@
-// Sales.js — no changes needed
 import React, { useState } from "react";
+import { useDarkMode } from "../context/DarkModeContext";
 import SalesHeader from "../components/sales/SalesHeader";
 import BeforeAfter from "../components/sales/BeforeAfter";
 import ProgressComparison from "../components/sales/ProgressComparison";
@@ -8,22 +8,32 @@ import ToolsSection from "../components/sales/ToolsSection";
 import TrustedSection from "../components/sales/TrustedSection";
 import PricingSection from "../components/sales/PricingSection";
 import GuaranteeSection from "../components/sales/GuaranteeSection";
+import StickyClaimButton from "../components/sales/StickyClaimButton";
 
 const Sales = () => {
-  const [selectedPlan, setSelectedPlan] = useState(false);
+
+  const { isDarkMode } = useDarkMode();
 
   return (
     <div>
-      <div className="rounded-2xl shadow-xl border p-4 sm:p-8 w-full max-w-xl mx-auto flex flex-col items-center mb-6 bg-white border-gray-200">
-        <SalesHeader />
-        <BeforeAfter />
-        <ProgressComparison />
-        <FeaturesList />
-        <ToolsSection />
-        <TrustedSection />
-        <PricingSection selectedPlan={selectedPlan} onSelectPlan={setSelectedPlan} />
+      {/* Sticky Claim Button */}
+      <StickyClaimButton />
+      
+     
+      <div className="pb-20">
+        <div className="form-bg rounded-2xl shadow-xl p-4 sm:p-8 w-full max-w-xl mx-auto flex flex-col items-center mb-6">
+          
+          <SalesHeader />
+          <BeforeAfter isDarkMode ={isDarkMode}/>
+          <ProgressComparison isDarkMode ={isDarkMode} />
+          
+          <FeaturesList />
+          <ToolsSection />
+          <TrustedSection isDarkMode ={isDarkMode} />
+          <PricingSection />
+        </div>
+        <GuaranteeSection isDarkMode ={isDarkMode}/>
       </div>
-      <GuaranteeSection />
     </div>
   );
 };

@@ -2,23 +2,41 @@ import React from "react";
 
 const ToolsSection = () => {
   const tools = [
-    "Daily Custom Meal Plan",
-    "Done-For-You Grocery Lists",
-    "Overwhelm-Free Delicious Recipes",
-    "Weekly Tips & Guidance",
+    {
+      title: "Daily Custom Meal Plan",
+      image: "/keto-food-1.webp",
+    },
+    {
+      title: "Done-For-You Grocery Lists",
+      image: "/keto-food-2.webp",
+    },
+    {
+      title: "Overwhelm-Free Delicious Recipes",
+      image: "/keto-food-3.webp",
+    },
+    {
+      title: "Weekly Tips & Guidance",
+      image: "/keto-food-4.webp",
+    },
   ];
 
   return (
     <>
-      <h1 className="font-bold text-lg sm:text-xl text-[#12241F]">
+      <h1 className="text-heading-sales font-bold text-lg sm:text-xl">
         Get all the right tools &amp; knowledge.
       </h1>
       <div className="mt-6 flex flex-row items-center justify-between w-full">
         <div className="flex flex-col gap-4 flex-1 max-w-xs">
-          {tools.map((text, i) => (
+          {tools.map((tool, i) => (
             <div key={i} className="flex items-center gap-3">
-              <img alt="" className="w-8 h-8" src="/assets/placeholder.webp" />
-              <span className="font-medium text-sm text-[#F75950]">{text}</span>
+              <img
+                alt={tool.title}
+                className="w-8 h-8 object-contain"
+                src={tool.image}
+              />
+              <span className="font-medium text-sm text-[#F75950]">
+                {tool.title}
+              </span>
             </div>
           ))}
         </div>

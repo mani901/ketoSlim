@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDarkMode } from "../context/DarkModeContext";
 import resultsData from "../components/result/resultsData";
 import ProgressDots from "../components/result/ProgressDots";
 import ResultCard from "../components/result/ResultCard";
@@ -9,6 +10,7 @@ const Result = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
+  const { isDarkMode } = useDarkMode();
   const formState = location.state || {};
 
   const hydratedResults = useMemo(() => {
@@ -97,6 +99,7 @@ const Result = () => {
         result={currentResult}
         onPrev={handlePrev}
         onNext={handleNext}
+        isDarkMode = {isDarkMode}
       />
     </div>
   );

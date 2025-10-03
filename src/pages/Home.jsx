@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDarkMode } from '../context/DarkModeContext';
 import FormFields from '../components/home/FormFields';
 import SubmitButton from '../components/home/SubmitButton';
 
 const Home = () => {
   const navigate = useNavigate();
+  const { isDarkMode } = useDarkMode();
   const [formData, setFormData] = useState({
     gender: 'male',
     bodyFat: 0,
@@ -41,14 +43,15 @@ const Home = () => {
 
   return (
     <div className="w-full max-w-xl mx-auto mt-1">
-       <h1 className="mb-8 text-[34px] leading-[1.2em] font-semibold text-center font-inter tracking-[-0.5px] text-[#12241f]">
+       <h1 className="mb-8 text-[34px] leading-[1.2em] font-semibold text-center font-inter tracking-[-0.5px] text-primary">
   Enter Your <span className="text-[#f75950]">Details</span>
 </h1>
 
-        <form onSubmit={handleSubmit} className="bg-white shadow-xl rounded-2xl p-4 sm:p-8 w-full max-w-xl space-y-6">
+        <form onSubmit={handleSubmit} className="form-bg shadow-xl rounded-2xl p-4 sm:p-8 w-full max-w-xl space-y-6">
           <FormFields 
             formData={formData}
             onInputChange={handleInputChange}
+            isDarkMode = {isDarkMode}
           />
           <SubmitButton 
             isValid={isFormValid()} 

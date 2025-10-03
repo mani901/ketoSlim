@@ -5,7 +5,7 @@ const SalesHeader = () => (
     <div className="flex justify-center items-center mb-2">
       <span className="text-2xl">🎯</span>
     </div>
-    <h2 className="text-center text-2xl sm:text-3xl font-bold mb-2 text-[#12241F]">
+    <h2 className="text-heading-sales text-center text-2xl sm:text-3xl font-bold mb-2">
       Your Personalized <br /> KetoSlim Plan Is Ready
     </h2>
   </div>

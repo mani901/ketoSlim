@@ -1,5 +1,100 @@
 @import "tailwindcss";
 
+/* Dark Mode Styles */
+.dark-mode-bg {
+  background-color: #f8f4f4;
+  transition: background-color 0.2s ease;
+}
+
+.dark .dark-mode-bg {
+  background-color: #181A1B;
+}
+
+.logo-bg {
+  background-color: #f8f4f4;
+  transition: background-color 0.2s ease;
+}
+
+.dark .logo-bg {
+  background-color: #181A1B;
+}
+
+.form-bg {
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.dark .form-bg {
+  background-color: #232627;
+  border-color: #2D3133;
+}
+
+.text-primary {
+  color: #12241f;
+  transition: color 0.2s ease;
+}
+
+.dark .text-primary {
+  color: white;
+}
+
+.text-secondary {
+  color: #6b7280;
+  transition: color 0.2s ease;
+}
+
+.dark .text-secondary {
+  color: #9ca3af;
+}
+
+.result-card {
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.dark .result-card {
+  background-color: #232627;
+  border-color: #2D3133;
+}
+
+.text-heading {
+  color: rgb(24, 59, 73);
+  transition: color 0.2s ease;
+}
+
+.dark .text-heading {
+  color: white;
+}
+
+.text-heading-sales {
+  color: rgb(24, 59, 73);
+  transition: color 0.2s ease;
+}
+
+.dark .text-heading-sales {
+  color: #E0E6E9;
+}
+
+.text-heading-results {
+  color: rgb(24, 59, 73);
+  transition: color 0.2s ease;
+}
+
+.dark .text-heading-results {
+  color: #F8F4F4;
+}
+
+.text-paragraph {
+  color: #13556F;
+  transition: color 0.2s ease;
+}
+
+.dark .text-paragraph {
+  color: #9ca3af;
+}
+
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
