@@ -1,6 +1,9 @@
+// src/components/result/ResultCard.jsx
 import React from "react";
 
 const ResultCard = ({ result }) => {
+  if (!result) return null;
+
   return (
     <div className="result-card rounded-2xl shadow-xl p-4 sm:p-8 w-full max-w-xl flex flex-col items-center mb-6">
       {/* Icon */}
@@ -11,9 +14,7 @@ const ResultCard = ({ result }) => {
       {/* Title */}
       <h1 className="text-heading-results text-center text-[34px] leading-[1.2em] font-semibold font-inter mb-1">
         {result.title}{" "}
-        {result.highlight && (
-          <span style={{ color: "var(--accent2)" }}>{result.highlight}</span>
-        )}
+        {result.highlight && <span style={{ color: "var(--accent2)" }}>{result.highlight}</span>}
       </h1>
 
       {/* Subtitle */}
@@ -25,30 +26,23 @@ const ResultCard = ({ result }) => {
 
       {/* Image */}
       {result.image && (
-        <img
-          alt={result.title}
-          className="rounded-lg w-auto h-auto mb-4"
-          loading="eager"
-          src={result.image}
-        />
+        <img alt={result.title} className="rounded-lg w-auto h-auto mb-4" loading="eager" src={result.image} />
       )}
 
       {/* Paragraphs */}
       <div className="flex flex-col items-center gap-4 mb-4">
         {result.paragraphs?.map((text, idx) => (
-          <p
-            key={idx}
-            className="text-paragraph text-[20px] font-normal font-inter mb-2"
-          >
+          <p key={idx} className="text-paragraph text-[20px] font-normal font-inter mb-2">
             {text}
           </p>
-          
         ))}
 
-        <p className="text-[16px] font-normal font-inter mt-2 mb-6 text-[#f75950]">
-  Your current level may be slowing metabolism, increasing inflammation, or making it harder to stay consistent with workouts.
-</p>
-      
+        {/* Conditional paragraph */}
+        {result.selectedConditionalParagraph && (
+          <p className="text-[16px] font-normal font-inter mt-2 mb-6 text-[#f75950]">
+            {result.selectedConditionalParagraph}
+          </p>
+        )}
       </div>
     </div>
   );

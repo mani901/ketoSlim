@@ -24,44 +24,103 @@ const Result = () => {
       daysToSeeResults,
     } = formState;
 
+    // Helper to coerce safely to number (handles strings, undefined, null)
+    const toNum = (v) => {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : null;
+    };
+
     return resultsData.map((item) => {
+      const updated = { ...item };
+
+      // Update titles/highlights as before
       if (item.id === "body-fat" && (bodyFat || bodyFat === 0)) {
-        return {
-          ...item,
-          title: `Your Body Fat Percentage Is ${bodyFat}%`,
-        };
+        updated.title = `Your Body Fat Percentage Is ${bodyFat}%`;
       }
       if (item.id === "bmi" && (bmi || bmi === 0)) {
-        return {
-          ...item,
-          title: `Your BMI Is ${bmi}`,
-        };
+        updated.title = `Your BMI Is ${bmi}`;
       }
       if (item.id === "calories" && dailyCalorieTarget) {
-        return {
-          ...item,
-          highlight: `${dailyCalorieTarget} Calories`,
-        };
+        updated.highlight = `${dailyCalorieTarget} Calories`;
       }
-      if (item.id === "hydration" && cupsOfWater) {
-        return {
-          ...item,
-          title: `Your Body Needs ${cupsOfWater} Cups of Water Daily`,
-        };
+      if (item.id === "hydration" && cupsOfWater !== undefined && cupsOfWater !== null) {
+        updated.title = `Your Body Needs ${cupsOfWater} Cups of Water Daily`;
       }
       if (item.id === "weight-rate" && weeklyWeightLossGoal) {
-        return {
-          ...item,
-          highlight: `${weeklyWeightLossGoal} lbs / Week`,
-        };
+        updated.highlight = `${weeklyWeightLossGoal} lbs / Week`;
       }
       if (item.id === "timeline" && daysToSeeResults) {
-        return {
-          ...item,
-          title: `You Could See Results in as Little as ${daysToSeeResults} Days`,
-        };
+        updated.title = `You Could See Results in as Little as ${daysToSeeResults} Days`;
       }
-      return item;
+
+
+      // We'll compute one selectedConditionalParagraph (string) when applicable.
+      if (Array.isArray(item.conditionalParagraphs) && item.conditionalParagraphs.length > 0) {
+        let selected = null;
+
+        // BODY FAT logic (gender-sensitive)
+        if (item.id === "body-fat" && (bodyFat || bodyFat === 0)) {
+          const bf = toNum(bodyFat);
+          const g = String(gender || "").trim().toLowerCase();
+          if ((g === "male" && bf < 24) || (g === "female" && bf < 31)) {
+            selected = item.conditionalParagraphs[0];
+          } else if (
+            (g === "male" && bf >= 25 && bf <= 31) ||
+            (g === "female" && bf >= 32 && bf <= 39)
+          ) {
+            selected = item.conditionalParagraphs[1];
+          } else if ((g === "male" && bf >= 32) || (g === "female" && bf >= 40)) {
+            selected = item.conditionalParagraphs[2];
+          }
+        }
+
+        // BMI logic
+        else if (item.id === "bmi" && (bmi || bmi === 0)) {
+          const bmiVal = toNum(bmi);
+         
+          if (bmiVal < 26) {
+            selected = item.conditionalParagraphs[0];
+          } else if (bmiVal >= 30 && bmiVal <= 34.9) {
+            selected = item.conditionalParagraphs[1];
+          } else if (bmiVal >= 35) {
+            selected = item.conditionalParagraphs[2];
+          }
+        }
+
+        // CALORIES logic
+        else if (item.id === "calories" && dailyCalorieTarget !== undefined && dailyCalorieTarget !== null) {
+          const cal = toNum(dailyCalorieTarget);
+          if (cal >= 1300 && cal <= 1500) {
+            selected = item.conditionalParagraphs[0];
+          } else if (cal >= 1100 && cal <= 1299) {
+            selected = item.conditionalParagraphs[1];
+          } else if (cal < 1100) {
+            selected = item.conditionalParagraphs[2];
+          }
+        }
+
+        // HYDRATION logic
+        else if (item.id === "hydration" && cupsOfWater !== undefined && cupsOfWater !== null) {
+          const cups = toNum(cupsOfWater);
+    
+          if (cups > 6) {
+            selected = item.conditionalParagraphs[0];
+          } else if (cups >= 3 && cups <= 6) {
+            selected = item.conditionalParagraphs[1];
+          } else if (cups === 2) {
+            selected = item.conditionalParagraphs[2];
+          } else if (cups <= 1) {
+            selected = item.conditionalParagraphs[3];
+          }
+        }
+
+        // If we found a selected paragraph, attach it to the result object
+        if (selected) {
+          updated.selectedConditionalParagraph = selected;
+        }
+      }
+
+      return updated;
     });
   }, [formState]);
 
@@ -69,16 +128,16 @@ const Result = () => {
 
   const handleNext = () => {
     if (currentStep < resultsData.length - 1) {
-      setCurrentStep(currentStep + 1);
+      setCurrentStep((s) => s + 1);
     } else {
       // Navigate to Sales page when on the last card
-      navigate('/sales');
+      navigate("/sales");
     }
   };
 
   const handlePrev = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      setCurrentStep((s) => s - 1);
     }
   };
 
@@ -86,9 +145,7 @@ const Result = () => {
     <div className="w-full max-w-xl" style={{ minHeight: "20vh", opacity: 1 }}>
       {/* Header */}
       <div className="w-full max-w-xl px-4 flex items-center justify-between pt-2 pb-2 mb-4">
-        <h2 className="font-inter text-md font-semibold text-[#36BC9F]">
-          Your Results
-        </h2>
+        <h2 className="font-inter text-md font-semibold text-[#36BC9F]">Your Results</h2>
         <ProgressDots steps={resultsData} currentStep={currentStep} />
       </div>
 
@@ -96,12 +153,7 @@ const Result = () => {
       <ResultCard result={currentResult} />
 
       {/* Navigation */}
-      <NavigationButtons
-        result={currentResult}
-        onPrev={handlePrev}
-        onNext={handleNext}
-        isDarkMode = {isDarkMode}
-      />
+      <NavigationButtons result={currentResult} onPrev={handlePrev} onNext={handleNext} isDarkMode={isDarkMode} />
     </div>
   );
 };
