@@ -1,22 +1,26 @@
 @import "tailwindcss";
 
 /* Dark Mode Styles */
-.dark-mode-bg {
+.app-container {
   background-color: #f8f4f4;
   transition: background-color 0.2s ease;
 }
 
-.dark .dark-mode-bg {
+.dark .app-container {
   background-color: #181A1B;
 }
 
-.logo-bg {
-  background-color: #f8f4f4;
-  transition: background-color 0.2s ease;
+/* Ensure full viewport coverage */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.dark .logo-bg {
-  background-color: #181A1B;
+#root {
+  width: 100%;
+  min-height: 100vh;
 }
 
 .form-bg {
