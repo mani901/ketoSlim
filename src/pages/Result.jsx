@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import resultsData from "../components/result/resultsData";
 import ProgressDots from "../components/result/ProgressDots";
 import ResultCard from "../components/result/ResultCard";
@@ -8,6 +8,7 @@ import NavigationButtons from "../components/result/NavigationButtons";
 const Result = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const location = useLocation();
+  const navigate = useNavigate();
   const formState = location.state || {};
 
   const hydratedResults = useMemo(() => {
@@ -66,6 +67,9 @@ const Result = () => {
   const handleNext = () => {
     if (currentStep < resultsData.length - 1) {
       setCurrentStep(currentStep + 1);
+    } else {
+      // Navigate to Sales page when on the last card
+      navigate('/sales');
     }
   };
 
