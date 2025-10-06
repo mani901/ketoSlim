@@ -1,7 +1,12 @@
 import React from "react";
 import Progress from "./Progress";
 
-const ProgressComparison = ({ isDarkMode }) => (
+// ✅ Define prop types
+interface ProgressComparisonProps {
+  isDarkMode: boolean;
+}
+
+const ProgressComparison: React.FC<ProgressComparisonProps> = ({ isDarkMode }) => (
   <div
     className={`w-full grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 rounded-xl p-4 sm:p-6 ${
       isDarkMode ? "bg-[#232627]" : "bg-white"
@@ -12,12 +17,13 @@ const ProgressComparison = ({ isDarkMode }) => (
       <div>
         <div
           className="text-xs mb-1"
-          style={{ color: isDarkMode ? '#B5C2C9' : '#13556F' }}
+          style={{ color: isDarkMode ? "#B5C2C9" : "#13556F" }}
         >
           Body Fat
         </div>
         <div className="font-bold text-base text-[#F75950]">20–25%</div>
       </div>
+
       <Progress
         label="Energy Levels"
         value="30%"
@@ -43,12 +49,13 @@ const ProgressComparison = ({ isDarkMode }) => (
       <div>
         <div
           className="text-xs mb-1"
-          style={{ color: isDarkMode ? '#B5C2C9' : '#13556F' }}
+          style={{ color: isDarkMode ? "#B5C2C9" : "#13556F" }}
         >
           Body Fat
         </div>
         <div className="font-bold text-base text-[#36BC9F]">10–12%</div>
       </div>
+
       <Progress
         label="Energy Levels"
         value="85%"

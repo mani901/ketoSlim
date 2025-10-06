@@ -1,16 +1,19 @@
-import React from 'react';
+import React from "react";
 
-const SubmitButton = ({ isValid, onSubmit }) => {
+interface SubmitButtonProps {
+  isValid: boolean;
+  onSubmit?: (event: React.FormEvent<HTMLButtonElement>) => void;
+}
+
+const SubmitButton: React.FC<SubmitButtonProps> = ({ isValid, onSubmit }) => {
   return (
     <>
-
       <button
         type="submit"
+        onClick={onSubmit}
         disabled={!isValid}
         className={`w-full text-lg font-semibold bg-[#36bc9f] border border-[#36bc9f] hover:opacity-90 py-3 px-4 focus:outline-none rounded-xl focus:ring-2 cursor-pointer transition-colors duration-300 ${
-          isValid
-            ? ' text-white'
-            : 'opacity-50 text-white cursor-pointer'
+          isValid ? "text-white" : "opacity-50 text-white cursor-pointer"
         }`}
       >
         See My Results

@@ -1,6 +1,23 @@
-import React from 'react';
+import React from "react";
 
-const NavigationButtons = ({ result, onPrev, onNext, isDarkMode }) => {
+
+interface NavigationButtonsProps {
+  result: {
+    prevButton?: string;
+    nextButton?: string;
+  };
+  onPrev: () => void;
+  onNext: () => void;
+  isDarkMode: boolean;
+}
+
+
+const NavigationButtons: React.FC<NavigationButtonsProps> = ({
+  result,
+  onPrev,
+  onNext,
+  isDarkMode,
+}) => {
   return (
     <div className="w-full max-w-xl px-4 mt-6 mb-8">
       <div
@@ -8,6 +25,7 @@ const NavigationButtons = ({ result, onPrev, onNext, isDarkMode }) => {
           result.prevButton ? "justify-between" : "justify-end"
         }`}
       >
+        {/* Previous Button */}
         {result.prevButton && (
           <button
             onClick={onPrev}
@@ -31,8 +49,8 @@ const NavigationButtons = ({ result, onPrev, onNext, isDarkMode }) => {
                 strokeLinejoin="round"
                 style={{ color: "#36BC9F" }}
               >
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
               </svg>
             </span>
             <span className="flex-1 text-center">{result.prevButton}</span>
@@ -40,6 +58,7 @@ const NavigationButtons = ({ result, onPrev, onNext, isDarkMode }) => {
           </button>
         )}
 
+        {/* Next Button */}
         {result.nextButton && (
           <button
             onClick={onNext}
@@ -53,7 +72,7 @@ const NavigationButtons = ({ result, onPrev, onNext, isDarkMode }) => {
             }}
           >
             <span style={{ width: "20px", marginRight: "8px" }}></span>
-            <span className="flex-1 text-center">Next</span>
+            <span className="flex-1 text-center">{result.nextButton}</span>
             <span style={{ marginRight: "8px" }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,8 +86,8 @@ const NavigationButtons = ({ result, onPrev, onNext, isDarkMode }) => {
                 strokeLinejoin="round"
                 style={{ color: "white" }}
               >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
               </svg>
             </span>
           </button>

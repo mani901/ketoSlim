@@ -1,9 +1,13 @@
 import React from "react";
 
-const GuaranteeSection = ({ isDarkMode }) => {
-  // Helper to conditionally set text color
-  const textColor = isDarkMode ? '#B5C2C9' : '#13556F';
-  const headingColor = isDarkMode ? '#B5C2C9' : 'inherit';
+interface GuaranteeSectionProps {
+  isDarkMode: boolean;
+}
+
+const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({ isDarkMode }) => {
+  // Helper to conditionally set text colors
+  const textColor = isDarkMode ? "#B5C2C9" : "#13556F";
+  const headingColor = isDarkMode ? "#B5C2C9" : "inherit";
 
   return (
     <section id="guarantee-section" className="w-full flex justify-center px-2 mt-8">
@@ -51,7 +55,7 @@ const GuaranteeSection = ({ isDarkMode }) => {
         <div
           className="rounded-xl text-sm p-4"
           style={{
-            backgroundColor: isDarkMode ? '#181a1b' : '#F8F4F4',
+            backgroundColor: isDarkMode ? "#181a1b" : "#F8F4F4",
             color: textColor,
           }}
         >

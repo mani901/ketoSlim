@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDarkMode } from "../context/DarkModeContext";
+
 import SalesHeader from "../components/sales/SalesHeader";
 import BeforeAfter from "../components/sales/BeforeAfter";
 import ProgressComparison from "../components/sales/ProgressComparison";
@@ -10,29 +11,25 @@ import PricingSection from "../components/sales/PricingSection";
 import GuaranteeSection from "../components/sales/GuaranteeSection";
 import StickyClaimButton from "../components/sales/StickyClaimButton";
 
-const Sales = () => {
-
+const Sales: React.FC = () => {
   const { isDarkMode } = useDarkMode();
 
   return (
     <div>
       {/* Sticky Claim Button */}
       <StickyClaimButton />
-      
-     
+
       <div className="pb-20">
         <div className="form-bg rounded-2xl shadow-xl p-4 sm:p-8 w-full max-w-xl mx-auto flex flex-col items-center mb-6">
-          
           <SalesHeader />
-          <BeforeAfter isDarkMode ={isDarkMode}/>
-          <ProgressComparison isDarkMode ={isDarkMode} />
-          
+          <BeforeAfter isDarkMode={isDarkMode} />
+          <ProgressComparison isDarkMode={isDarkMode} />
           <FeaturesList />
           <ToolsSection />
-          <TrustedSection isDarkMode ={isDarkMode} />
+          <TrustedSection isDarkMode={isDarkMode} />
           <PricingSection />
         </div>
-        <GuaranteeSection isDarkMode ={isDarkMode}/>
+        <GuaranteeSection isDarkMode={isDarkMode} />
       </div>
     </div>
   );

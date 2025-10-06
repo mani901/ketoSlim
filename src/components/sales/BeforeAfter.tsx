@@ -1,6 +1,10 @@
 import React from "react";
 
-const BeforeAfter = ({ isDarkMode }) => (
+interface BeforeAfterProps {
+  isDarkMode: boolean;
+}
+
+const BeforeAfter: React.FC<BeforeAfterProps> = ({ isDarkMode }) => (
   <>
     <div className="relative flex flex-row justify-center items-end gap-18 mb-2 mt-4 w-full min-h-[180px]">
       {/* Background SVG Arrow */}
@@ -22,8 +26,8 @@ const BeforeAfter = ({ isDarkMode }) => (
       <img
         alt="Before"
         className="rounded-lg relative z-10"
-        width="170"
-        height="180"
+        width={170}
+        height={180}
         src="/beforeTransform.webp"
       />
 
@@ -31,8 +35,8 @@ const BeforeAfter = ({ isDarkMode }) => (
       <img
         alt="After"
         className="rounded-lg relative z-10"
-        width="170"
-        height="180"
+        width={170}
+        height={180}
         src="/afterTransform.webp"
       />
     </div>

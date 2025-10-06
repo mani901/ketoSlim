@@ -1,7 +1,11 @@
-// src/components/result/ResultCard.jsx
 import React from "react";
+import { ResultDataItem } from "./resultsData";
 
-const ResultCard = ({ result }) => {
+interface ResultCardProps {
+  result?: ResultDataItem;
+}
+
+const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
   if (!result) return null;
 
   return (
@@ -14,7 +18,9 @@ const ResultCard = ({ result }) => {
       {/* Title */}
       <h1 className="text-heading-results text-center text-[34px] leading-[1.2em] font-semibold font-inter mb-1">
         {result.title}{" "}
-        {result.highlight && <span style={{ color: "var(--accent2)" }}>{result.highlight}</span>}
+        {result.highlight && (
+          <span style={{ color: "var(--accent2)" }}>{result.highlight}</span>
+        )}
       </h1>
 
       {/* Subtitle */}
@@ -26,13 +32,21 @@ const ResultCard = ({ result }) => {
 
       {/* Image */}
       {result.image && (
-        <img alt={result.title} className="rounded-lg w-auto h-auto mb-4" loading="eager" src={result.image} />
+        <img
+          alt={result.title}
+          className="rounded-lg w-auto h-auto mb-4"
+          loading="eager"
+          src={result.image}
+        />
       )}
 
       {/* Paragraphs */}
       <div className="flex flex-col items-center gap-4 mb-4">
         {result.paragraphs?.map((text, idx) => (
-          <p key={idx} className="text-paragraph text-[20px] font-normal font-inter mb-2">
+          <p
+            key={idx}
+            className="text-paragraph text-[20px] font-normal font-inter mb-2"
+          >
             {text}
           </p>
         ))}

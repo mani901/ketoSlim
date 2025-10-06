@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-const StickyClaimButton = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const StickyClaimButton: React.FC = () => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const pricingSection = document.getElementById('pricing-section');
+    const handleScroll = (): void => {
+      const pricingSection = document.getElementById("pricing-section");
       if (pricingSection) {
         const rect = pricingSection.getBoundingClientRect();
         // Show button when pricing section is not yet in view
@@ -13,18 +13,18 @@ const StickyClaimButton = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial state
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial visibility on mount
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToPlan = () => {
-    const planSection = document.getElementById('pricing-section');
+  const scrollToPlan = (): void => {
+    const planSection = document.getElementById("pricing-section");
     if (planSection) {
-      planSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      planSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
@@ -41,19 +41,19 @@ const StickyClaimButton = () => {
         >
           <span className="mx-auto">Claim My Plan</span>
           <span className="absolute right-6 text-lg text-white">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
             </svg>
           </span>
         </button>
