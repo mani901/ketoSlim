@@ -1,16 +1,72 @@
-# React + Vite
+## KetoSlim • React + Vite + TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, accessible React application scaffolded with Vite and refined for strict TypeScript, clean architecture, and maintainability. It implements a multi-step flow: collect inputs on Home, show personalized Results, and present a Sales page.
 
-Currently, two official plugins are available:
+### Highlights
+- TypeScript strict with extra safety flags (`noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`)
+- ESLint configured for TypeScript, React Hooks, JSX a11y, Import order, and Prettier
+- Tailwind v4 styling; dark mode via `html.dark` class managed by context
+- Global form state with session persistence for resilient navigation/reloads
+- Runtime validation using Zod; results derived via pure utilities
+- ErrorBoundary and NotFound route for graceful failure handling
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Getting Started
+1) Install dependencies
+```bash
+npm i
+```
+2) Run in development
+```bash
+npm run dev
+```
+3) Build and preview
+```bash
+npm run build && npm run preview
+```
 
-## React Compiler
+### Scripts
+- dev: start Vite dev server
+- build: production build
+- preview: preview built app
+- lint: run ESLint
+- lint:fix: fix lint issues
+- typecheck: run TypeScript without emitting
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Project Structure
+```
+src/
+  components/
+    common/          # Shared UI (DarkMode toggle, ErrorBoundary)
+    home/            # Home page components (form fields, submit)
+    result/          # Result UI (card, dots, nav)
+    sales/           # Sales page components
+  context/
+    DarkModeContext.tsx   # Dark mode state + html class toggle
+    FormContext.tsx       # Global form state with session persistence
+  pages/
+    Home.tsx         # Form collection, Zod validation, store to context
+    Result.tsx       # Hydrates static data with user state
+    Sales.tsx        # Sales presentation
+  utils/
+    formValidation.ts # Zod schema and coercion helpers
+    results.ts        # Pure hydration logic for results
+  types/
+    index.ts          # Shared domain types
+```
 
-## Expanding the ESLint configuration
+### Accessibility
+- Inputs labeled; radio groups wrapped in `fieldset/legend`
+- Buttons have semantic attributes; decorative SVGs are `aria-hidden`
+- Links with `href="#"` converted to non-interactive controls where applicable
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Styling
+- Tailwind utilities favored over inline styles
+- Brand colors preserved; dark mode controlled by the `dark` class
+
+### Notes
+- If session storage is cleared or Results is opened directly, the app prompts to complete the form first.
+
+### Tech Choices
+- Vite for fast dev/build; React 19; Tailwind 4; Zod for runtime validation
+- Module resolution tuned for Vite (`moduleResolution: Bundler`)
+

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PaymentOption from "./PaymentOption";
-import { useDarkMode } from "../../context/DarkModeContext";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 const PricingSection: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<string>("1-payment");
   const [timeLeft, setTimeLeft] = useState<number>(600); // 10 minutes
 
-  // ✅ Destructure actual boolean value from context
+
   const { isDarkMode } = useDarkMode();
 
   // Countdown timer effect

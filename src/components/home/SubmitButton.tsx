@@ -1,5 +1,6 @@
 import React from "react";
 
+// Simple submit button that disables itself if the form is invalid.
 interface SubmitButtonProps {
   isValid: boolean;
   onSubmit?: (event: React.FormEvent<HTMLButtonElement>) => void;

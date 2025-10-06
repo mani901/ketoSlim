@@ -1,15 +1,15 @@
 import React from "react";
-import { useDarkMode } from "../context/DarkModeContext";
+import { useDarkMode } from "@/context/DarkModeContext";
 
-import SalesHeader from "../components/sales/SalesHeader";
-import BeforeAfter from "../components/sales/BeforeAfter";
-import ProgressComparison from "../components/sales/ProgressComparison";
-import FeaturesList from "../components/sales/FeaturesList";
-import ToolsSection from "../components/sales/ToolsSection";
-import TrustedSection from "../components/sales/TrustedSection";
-import PricingSection from "../components/sales/PricingSection";
-import GuaranteeSection from "../components/sales/GuaranteeSection";
-import StickyClaimButton from "../components/sales/StickyClaimButton";
+import SalesHeader from "@/components/sales/SalesHeader";
+import BeforeAfter from "@/components/sales/BeforeAfter";
+import ProgressComparison from "@/components/sales/ProgressComparison";
+import FeaturesList from "@/components/sales/FeaturesList";
+import ToolsSection from "@/components/sales/ToolsSection";
+import TrustedSection from "@/components/sales/TrustedSection";
+import PricingSection from "@/components/sales/PricingSection";
+import GuaranteeSection from "@/components/sales/GuaranteeSection";
+import StickyClaimButton from "@/components/sales/StickyClaimButton";
 
 const Sales: React.FC = () => {
   const { isDarkMode } = useDarkMode();

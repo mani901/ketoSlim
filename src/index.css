@@ -1,13 +1,12 @@
 @import "tailwindcss";
 
-/* Dark Mode Styles */
+/* App shell background (light/dark) using Tailwind utilities */
 .app-container {
-  background-color: #f8f4f4;
-  transition: background-color 0.2s ease;
+  @apply bg-[#f8f4f4] transition-colors duration-200;
 }
 
 .dark .app-container {
-  background-color: #181A1B;
+  @apply bg-[#181A1B];
 }
 
 /* Ensure full viewport coverage */
@@ -24,79 +23,67 @@ html, body {
 }
 
 .form-bg {
-  background-color: white;
-  border: 2px solid #e5e7eb;
-  transition: all 0.2s ease;
+  @apply bg-white border-2 border-[#e5e7eb] transition-all duration-200;
 }
 
 .dark .form-bg {
-  background-color: #232627;
-  border-color: #2D3133;
+  @apply bg-[#232627] border-[#2D3133];
 }
 
 .text-primary {
-  color: #12241f;
-  transition: color 0.2s ease;
+  @apply text-[#12241f] transition-colors duration-200;
 }
 
 .dark .text-primary {
-  color: white;
+  @apply text-white;
 }
 
 .text-secondary {
-  color: #6b7280;
-  transition: color 0.2s ease;
+  @apply text-gray-500 transition-colors duration-200;
 }
 
 .dark .text-secondary {
-  color: #9ca3af;
+  @apply text-gray-400;
 }
 
 .result-card {
-  background-color: white;
-  border: 2px solid #e5e7eb;
-  transition: all 0.2s ease;
+  @apply bg-white border-2 border-[#e5e7eb] transition-all duration-200;
 }
 
 .dark .result-card {
-  background-color: #232627;
-  border-color: #2D3133;
+  @apply bg-[#232627] border-[#2D3133];
 }
 
 .text-heading {
-  color: rgb(24, 59, 73);
-  transition: color 0.2s ease;
+  @apply text-[#183b49] transition-colors duration-200;
 }
 
 .dark .text-heading {
-  color: white;
+  @apply text-white;
 }
 
 .text-heading-sales {
-  color: rgb(24, 59, 73);
-  transition: color 0.2s ease;
+  @apply text-[#183b49] transition-colors duration-200;
 }
 
 .dark .text-heading-sales {
-  color: #E0E6E9;
+  @apply text-[#E0E6E9];
 }
 
 .text-heading-results {
-  color: rgb(24, 59, 73);
-  transition: color 0.2s ease;
+  @apply text-[#183b49] transition-colors duration-200;
 }
 
 .dark .text-heading-results {
-  color: #F8F4F4;
+  @apply text-[#F8F4F4];
 }
 
 .text-paragraph {
-  color: #13556F;
-  transition: color 0.2s ease;
+  @apply text-[#13556F] transition-colors duration-200;
 }
 
 .dark .text-paragraph {
-  color: #9ca3af;
+  @apply text-gray-400;
 }
 
 .slider::-webkit-slider-thumb {

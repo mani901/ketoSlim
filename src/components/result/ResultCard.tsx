@@ -1,6 +1,7 @@
 import React from "react";
-import { ResultDataItem } from "./resultsData";
+import type { ResultDataItem } from "@/types";
 
+// Presentational card for a single result slide.
 interface ResultCardProps {
   result?: ResultDataItem;
 }

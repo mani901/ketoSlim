@@ -6,18 +6,18 @@ import React, {
   ReactNode,
 } from "react";
 
-// 1️⃣ Define the shape of the context
+// Define the shape of the context
 interface DarkModeContextType {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
 }
 
-// 2️⃣ Create the context with a typed default value (undefined initially)
+// Create the context with a typed default value (undefined initially)
 const DarkModeContext = createContext<DarkModeContextType | undefined>(
   undefined
 );
 
-// 3️⃣ Custom hook for consuming context safely
+// Custom hook for consuming context safely
 export const useDarkMode = (): DarkModeContextType => {
   const context = useContext(DarkModeContext);
   if (!context) {
@@ -26,7 +26,7 @@ export const useDarkMode = (): DarkModeContextType => {
   return context;
 };
 
-// 4️⃣ Provider component
+// Provider component
 interface DarkModeProviderProps {
   children: ReactNode;
 }

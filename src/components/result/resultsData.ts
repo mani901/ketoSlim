@@ -1,16 +1,4 @@
-export interface ResultDataItem {
-  id: string;
-  icon: string;
-  title: string;
-  subtitle?: string;
-  image?: string;
-  highlight?: string;
-  paragraphs: string[];
-  conditionalParagraphs?: string[];
-  selectedConditionalParagraph?: string;
-  prevButton?: string; 
-  nextButton?: string;
-}
+import type { ResultDataItem } from "@/types";
 
 const resultsData: ResultDataItem[] = [
   {
@@ -28,7 +16,6 @@ const resultsData: ResultDataItem[] = [
       "Your current level may be slowing metabolism, increasing inflammation, or making it harder to stay consistent with workouts.",
       "At this level, your body may be stuck in a constant state of inflammation and energy imbalance — making fat loss harder, appetite less predictable, and progress feel like a constant uphill battle.",
     ],
-    prevButton: undefined,
     nextButton: "BMI",
   },
   {

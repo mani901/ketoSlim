@@ -25,10 +25,9 @@ const TrustedSection: React.FC<TrustedSectionProps> = ({ isDarkMode }) => {
     <div className="w-full mt-10">
       {/* Heading */}
       <h2
-        className="font-bold text-3xl sm:text-4xl mb-10 text-left"
-        style={{
-          color: isDarkMode ? "#E0E6E9" : "#12241F",
-        }}
+        className={`font-bold text-3xl sm:text-4xl mb-10 text-left ${
+          isDarkMode ? "text-[#E0E6E9]" : "text-[#12241F]"
+        }`}
       >
         Trusted by health &amp; nutrition professionals
       </h2>
@@ -49,10 +48,7 @@ const TrustedSection: React.FC<TrustedSectionProps> = ({ isDarkMode }) => {
 
             {/* Text */}
             <p
-              className="text-base"
-              style={{
-                color: isDarkMode ? "#B5C2C9" : "#13556F",
-              }}
+              className={`text-base ${isDarkMode ? "text-[#B5C2C9]" : "text-[#13556F]"}`}
             >
               {item.text}
             </p>
@@ -60,10 +56,10 @@ const TrustedSection: React.FC<TrustedSectionProps> = ({ isDarkMode }) => {
             {/* Source link */}
             <a
               href="#"
-              className="underline text-sm mt-1"
-              style={{
-                color: "#F75950",
-              }}
+              role="button"
+              aria-disabled="true"
+              className="underline text-sm mt-1 text-[#F75950] cursor-default"
+              onClick={(e) => e.preventDefault()}
             >
               source
             </a>

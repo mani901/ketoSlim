@@ -1,18 +1,19 @@
 import React from "react";
+import type { FormState } from "@/types";
 
-interface FormData {
-  gender: string;
+type DraftForm = {
+  gender: FormState["gender"];
   bodyFat: number;
   bmi: number;
-  dailyCalorieTarget: number | string;
-  cupsOfWater: number | string;
-  weeklyWeightLossGoal: string;
-  daysToSeeResults: string;
-}
+  dailyCalorieTarget: number | "";
+  cupsOfWater: number | "";
+  weeklyWeightLossGoal: number | "";
+  daysToSeeResults: number | "";
+};
 
 interface FormFieldsProps {
-  formData: FormData;
-  onInputChange: (field: keyof FormData, value: string) => void;
+  formData: DraftForm;
+  onInputChange: (field: keyof DraftForm, value: string | number) => void;
   isDarkMode: boolean;
 }
 
@@ -29,17 +30,19 @@ const FormFields: React.FC<FormFieldsProps> = ({
   return (
     <>
       {/* Gender */}
-      <div className="mb-4">
-        <label className={labelClass}>
+      <fieldset className="mb-4">
+        <legend className={labelClass}>
           Gender <span className="text-red-500">*</span>
-        </label>
-        <div className="flex space-x-4">
+        </legend>
+        <div className="flex space-x-4" role="radiogroup" aria-label="Gender">
           <label
             className={`flex items-center ${
               isDarkMode ? "text-white" : "text-gray-700"
             }`}
+            htmlFor="gender-male"
           >
             <input
+              id="gender-male"
               type="radio"
               name="gender"
               value="male"
@@ -53,8 +56,10 @@ const FormFields: React.FC<FormFieldsProps> = ({
             className={`flex items-center ${
               isDarkMode ? "text-white" : "text-gray-700"
             }`}
+            htmlFor="gender-female"
           >
             <input
+              id="gender-female"
               type="radio"
               name="gender"
               value="female"
@@ -65,7 +70,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
             Female
           </label>
         </div>
-      </div>
+      </fieldset>
 
       {/* Body Fat % */}
       <div className="mb-4">
@@ -79,7 +84,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
               min="0"
               max="100"
               value={formData.bodyFat}
-              onChange={(e) => onInputChange("bodyFat", e.target.value)}
+              onChange={(e) => onInputChange("bodyFat", Number(e.target.value))}
               className="slider w-full h-2 rounded-lg appearance-none cursor-pointer"
               style={{
                 background: `linear-gradient(to right, #10b981 0%, #10b981 ${formData.bodyFat}%, #183b49 ${formData.bodyFat}%, #183b49 100%)`,
@@ -105,7 +110,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
               min="0"
               max="40"
               value={formData.bmi}
-              onChange={(e) => onInputChange("bmi", e.target.value)}
+              onChange={(e) => onInputChange("bmi", Number(e.target.value))}
               className="slider w-full h-2 rounded-lg appearance-none cursor-pointer"
               style={{
                 background: `linear-gradient(to right, #10b981 0%, #10b981 ${
@@ -138,7 +143,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
   aria-required="true"
   type="number"
   value={formData.dailyCalorieTarget}
-  onChange={(e) => onInputChange("dailyCalorieTarget", e.target.value)}
+  onChange={(e) => onInputChange("dailyCalorieTarget", Number(e.target.value))}
   name="calorieTarget"
 />
 </div>
@@ -163,7 +168,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
               : "bg-white border-gray-200 focus:ring-black text-[#183b49]"
           } focus:outline-none focus:ring-1 focus:border-transparent cursor-pointer`}
           value={formData.cupsOfWater}
-          onChange={(e) => onInputChange("cupsOfWater", e.target.value)}
+          onChange={(e) => onInputChange("cupsOfWater", Number(e.target.value))}
         >
           <option value="">Select cups</option>
           <option value="1">1</option>
@@ -180,11 +185,14 @@ const FormFields: React.FC<FormFieldsProps> = ({
           <span className="text-red-500">*</span>
         </label>
         <input
-          type="text"
+          type="number"
+          step="0.1"
+          min="0"
+          inputMode="decimal"
           placeholder="e.g. 1.5"
           value={formData.weeklyWeightLossGoal}
           onChange={(e) =>
-            onInputChange("weeklyWeightLossGoal", e.target.value)
+            onInputChange("weeklyWeightLossGoal", Number(e.target.value))
           }
           className={`w-full rounded px-3 py-2 transition border ${
     isDarkMode ? "text-white border-[#2d3133] focus:border-black focus:ring-white" : "border-gray-300 focus:ring-black focus:border-black"
@@ -201,7 +209,7 @@ const FormFields: React.FC<FormFieldsProps> = ({
           type="text"
           placeholder="e.g. 30"
           value={formData.daysToSeeResults}
-          onChange={(e) => onInputChange("daysToSeeResults", e.target.value)}
+          onChange={(e) => onInputChange("daysToSeeResults", Number(e.target.value))}
          className={`w-full rounded px-3 py-2 transition border ${
     isDarkMode ? "text-white border-[#2d3133] focus:border-black focus:ring-white" : "border-gray-300 focus:ring-black focus:border-black"
           }  rounded-md focus:outline-none focus:ring-1 `}

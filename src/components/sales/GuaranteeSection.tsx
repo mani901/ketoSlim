@@ -15,8 +15,7 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({ isDarkMode }) => {
         {/* Title + Icon */}
         <div className="flex items-center gap-4 mb-2">
           <h3
-            className="text-heading-sales font-bold text-4xl sm:text-5xl flex-1"
-            style={{ color: headingColor }}
+            className={`text-heading-sales font-bold text-4xl sm:text-5xl flex-1 ${isDarkMode ? 'text-[#B5C2C9]' : ''}`}
           >
             Money Back Guarantee
           </h3>
@@ -53,11 +52,8 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({ isDarkMode }) => {
 
         {/* Notice Box */}
         <div
-          className="rounded-xl text-sm p-4"
-          style={{
-            backgroundColor: isDarkMode ? "#181a1b" : "#F8F4F4",
-            color: textColor,
-          }}
+          className={`rounded-xl text-sm p-4 ${isDarkMode ? 'bg-[#181a1b]' : 'bg-[#F8F4F4]'} `}
+          style={{ color: textColor }}
         >
           <p className="mb-3">
             If you don’t cancel, KetoSlim will automatically continue your membership at the end of your introductory period and charge the membership fee of{" "}

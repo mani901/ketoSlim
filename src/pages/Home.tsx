@@ -1,57 +1,82 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDarkMode } from "../context/DarkModeContext";
-import FormFields from "../components/home/FormFields";
-import SubmitButton from "../components/home/SubmitButton";
+import { useDarkMode } from "@/context/DarkModeContext";
+import { useFormContext } from "@/context/FormContext";
+import { FormSchema } from "@/utils/formValidation";
+import type { FormState } from "@/types";
+import FormFields from "@/components/home/FormFields";
+import SubmitButton from "@/components/home/SubmitButton";
 
-interface FormData {
-  gender: string;
+type DraftForm = {
+  gender: FormState["gender"];
   bodyFat: number;
   bmi: number;
-  dailyCalorieTarget: string;
-  cupsOfWater: string;
-  weeklyWeightLossGoal: string;
-  daysToSeeResults: string;
-}
+  dailyCalorieTarget: number | "";
+  cupsOfWater: number | "";
+  weeklyWeightLossGoal: number | "";
+  daysToSeeResults: number | "";
+};
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const { isDarkMode } = useDarkMode();
+  const { form, setForm } = useFormContext();
 
-  const [formData, setFormData] = useState<FormData>({
-    gender: "male",
-    bodyFat: 0,
-    bmi: 0,
-    dailyCalorieTarget: "",
-    cupsOfWater: "",
-    weeklyWeightLossGoal: "",
-    daysToSeeResults: "",
+  const [formData, setFormData] = useState<DraftForm>(() => {
+    return (
+      form ?? {
+        gender: "male",
+        bodyFat: 0,
+        bmi: 0,
+        dailyCalorieTarget: "",
+        cupsOfWater: "",
+        weeklyWeightLossGoal: "",
+        daysToSeeResults: "",
+      }
+    );
   });
 
-  const isFormValid = (): boolean => {
-    return (
-      formData.gender !== "" &&
-      formData.bodyFat !== null &&
-      formData.bmi !== null &&
-      formData.dailyCalorieTarget.trim() !== "" &&
-      formData.cupsOfWater !== "" &&
-      formData.weeklyWeightLossGoal.trim() !== "" &&
-      formData.daysToSeeResults.trim() !== ""
-    );
-  };
+  // Recompute validity when any draft field changes; no navigation unless valid.
+  const isFormValid = useMemo((): boolean => {
+    const candidate = {
+      gender: formData.gender,
+      bodyFat: Number(formData.bodyFat),
+      bmi: Number(formData.bmi),
+      dailyCalorieTarget: Number(formData.dailyCalorieTarget),
+      cupsOfWater: Number(formData.cupsOfWater),
+      weeklyWeightLossGoal: Number(formData.weeklyWeightLossGoal),
+      daysToSeeResults: Number(formData.daysToSeeResults),
+    };
+    const parsed = FormSchema.safeParse(candidate);
+    return parsed.success;
+  }, [formData]);
 
+  // Validate on submit, then promote draft to global context and navigate.
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (!isFormValid()) return;
-
-    console.log(formData);
-    navigate("/results", { state: formData });
+    const candidate = {
+      gender: formData.gender,
+      bodyFat: Number(formData.bodyFat),
+      bmi: Number(formData.bmi),
+      dailyCalorieTarget: Number(formData.dailyCalorieTarget),
+      cupsOfWater: Number(formData.cupsOfWater),
+      weeklyWeightLossGoal: Number(formData.weeklyWeightLossGoal),
+      daysToSeeResults: Number(formData.daysToSeeResults),
+    };
+    const parsed = FormSchema.safeParse(candidate);
+    if (!parsed.success) return;
+    setForm(parsed.data as FormState);
+    navigate("/results");
   };
 
-  const handleInputChange = (field: keyof FormData, value: string): void => {
+  // Convert numeric fields at the boundary; keep empty string for controlled inputs.
+  const handleInputChange = (
+    field: keyof DraftForm,
+    value: string | number
+  ): void => {
     setFormData((prev) => ({
       ...prev,
-      [field]: value,
+      [field]: typeof prev[field] === "number" ? Number(value) : value,
     }));
   };
 
@@ -70,7 +95,7 @@ const Home: React.FC = () => {
           onInputChange={handleInputChange}
           isDarkMode={isDarkMode}
         />
-        <SubmitButton isValid={isFormValid()} onSubmit={undefined} />
+        <SubmitButton isValid={isFormValid} />
       </form>
     </div>
   );
