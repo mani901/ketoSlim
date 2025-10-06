@@ -85,10 +85,18 @@ const FormFields: React.FC<FormFieldsProps> = ({
               max="100"
               value={formData.bodyFat}
               onChange={(e) => onInputChange("bodyFat", Number(e.target.value))}
-              className="slider w-full h-2 rounded-lg appearance-none cursor-pointer"
-              style={{
-                background: `linear-gradient(to right, #10b981 0%, #10b981 ${formData.bodyFat}%, #183b49 ${formData.bodyFat}%, #183b49 100%)`,
-              }}
+              className={`slider w-full h-2 rounded-lg appearance-none cursor-pointer ${
+                isDarkMode ? 'bg-transparent border border-[#767676]' : ''
+              }`}
+              style={
+                isDarkMode
+                  ? {
+                      background: `linear-gradient(to right, #10b981 0%, #10b981 ${formData.bodyFat}%, #0000 ${formData.bodyFat}%, #0000 100%)`,
+                    }
+                  : {
+                      background: `linear-gradient(to right, #10b981 0%, #10b981 ${formData.bodyFat}%, #183b49 ${formData.bodyFat}%, #183b49 100%)`,
+                    }
+              }
             />
           </div>
           <span className={`text-sm w-8 ${isDarkMode ? "text-white" : "text-black"}`}>{formData.bodyFat}</span>
@@ -111,12 +119,22 @@ const FormFields: React.FC<FormFieldsProps> = ({
               max="40"
               value={formData.bmi}
               onChange={(e) => onInputChange("bmi", Number(e.target.value))}
-              className="slider w-full h-2 rounded-lg appearance-none cursor-pointer"
-              style={{
-                background: `linear-gradient(to right, #10b981 0%, #10b981 ${
-                  (formData.bmi / 40) * 100
-                }%, #183b49 ${(formData.bmi / 40) * 100}%, #183b49 100%)`,
-              }}
+              className={`slider w-full h-2 rounded-lg appearance-none cursor-pointer ${
+                isDarkMode ? 'bg-transparent border border-[#767676]' : ''
+              }`}
+              style={
+                isDarkMode
+                  ? {
+                      background: `linear-gradient(to right, #10b981 0%, #10b981 ${
+                        (formData.bmi / 40) * 100
+                      }%, #0000 ${(formData.bmi / 40) * 100}%, #0000 100%)`,
+                    }
+                  : {
+                      background: `linear-gradient(to right, #10b981 0%, #10b981 ${
+                        (formData.bmi / 40) * 100
+                      }%, #183b49 ${(formData.bmi / 40) * 100}%, #183b49 100%)`,
+                    }
+              }
             />
           </div>
           <span className={`text-sm w-8 ${isDarkMode ? "text-white" : "text-black"}`}>{formData.bmi}</span>
